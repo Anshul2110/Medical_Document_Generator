@@ -1,7 +1,10 @@
-from openai import OpenAI
-from app.config import OPENAI_API_KEY
+from openai import AzureOpenAI
+from app.config import OPENAI_API_KEY, AZURE_OPENAI_ENDPOINT
 
-client = OpenAI(api_key=OPENAI_API_KEY)
+client = AzureOpenAI(
+    api_key=OPENAI_API_KEY,
+    azure_endpoint=AZURE_OPENAI_ENDPOINT
+)
 
 def generate_medical_report(data, patient_id: str):
     prompt = f"""
