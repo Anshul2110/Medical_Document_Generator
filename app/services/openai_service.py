@@ -1,9 +1,10 @@
 from openai import AzureOpenAI
-from app.config import OPENAI_API_KEY, AZURE_OPENAI_ENDPOINT
+from app.config import AZURE_OPENAI_API_KEY, AZURE_OPENAI_ENDPOINT
 
 client = AzureOpenAI(
-    api_key=OPENAI_API_KEY,
-    azure_endpoint=AZURE_OPENAI_ENDPOINT
+    api_key=AZURE_OPENAI_API_KEY,
+    azure_endpoint=AZURE_OPENAI_ENDPOINT,
+    api_version="2024-12-01-preview"
 )
 
 def generate_medical_report(data, patient_id: str):
@@ -38,7 +39,7 @@ def generate_medical_report(data, patient_id: str):
     """
 
     response = client.chat.completions.create(
-        model="gpt-4.1",
+        model="gpt-4.1-nano",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.2,
     )

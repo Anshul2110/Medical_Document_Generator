@@ -1,3 +1,4 @@
+import os
 from docx import Document
 
 def create_doc(report_text: str, patient_id: str):
