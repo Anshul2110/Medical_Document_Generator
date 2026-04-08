@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from app.models import PatientInput
-from app.services.anonymizer import anonymize_patient
+# from app.services.anonymizer import anonymize_patient
+from app.services.anonymizer import encrypt_name, decrypt_name
 from app.services.openai_service import generate_medical_report
 from app.services.doc_generator import create_doc
 from app.services.azure_blob import upload_to_blob
@@ -14,7 +15,7 @@ def health():
 @app.post("/generate-report")
 def generate_report(patient: PatientInput):
     # Step 1: Anonymize
-    patient_id = anonymize_patient(patient.name)
+    patient_id = encrypt_name(patient.name)
 
     # Step 2: Generate AI Report
     report_text = generate_medical_report(patient, patient_id)
