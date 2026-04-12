@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI
 from app.models import PatientInput
 # from app.services.anonymizer import anonymize_patient
@@ -25,6 +27,10 @@ def generate_report(patient: PatientInput):
 
     # Step 4: Upload to Azure
     blob_url = upload_to_blob(file_path)
+
+    ## remove local file after upload
+    os.remove(file_path)
+    
 
     return {
         "patient_id": patient_id,
