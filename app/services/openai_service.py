@@ -9,13 +9,13 @@ client = AzureOpenAI(
 
 def generate_medical_report(data, patient_id: str):
     prompt = f"""
-    You are a professional medical report generator.
+    You are a professional medical report generator and an expert in radiology. Based on the provided patient information, symptoms, x-ray observations, and diagnosis, generate a comprehensive advanced medical report.
 
     IMPORTANT:
-    - Do NOT hallucinate data
+    - Do NOT hallucinate 
     - Only use provided information
-    - This is NOT a final clinical diagnosis
-    - Maintain formal tone
+    - Maintain formal tone used in medical reports
+    - Provide accurate and higly advanced medical insights based on the data
 
     Patient ID: {patient_id}
     Age: {data.age}
@@ -31,9 +31,9 @@ def generate_medical_report(data, patient_id: str):
     {data.diagnosis}
 
     Generate structured report with:
-    1. Patient Summary
+    1. Patient Summary (do not include patient ID here)
     2. Clinical Findings
-    3. Diagnosis Explanation
+    3. Diagnosis Explanation (in case diagnosis is empty, explain based on symptoms and x-ray))
     4. Recommendations
     5. Disclaimer
     """
